@@ -1,0 +1,7 @@
+
+gcd : Z -> Z -> Z
+
+gcd a b = 
+    { a                 if b is 0
+    { b                 if a is 0
+    { gcd b (a mod b)   otherwise
