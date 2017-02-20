@@ -108,6 +108,7 @@ interpBOp _ And     = boolOp (&&)
 interpBOp _ Or      = boolOp (||)
 interpBOp _ Mod     = modOp
 interpBOp _ Divides = numOp divides
+--interpBOp _ Gcd     = numOp gcd'
 interpBOp _ RelPm   = numOp relPm
 interpBOp _ _ = error "interpBOp unimplemented"
 
@@ -145,6 +146,9 @@ divides :: Rational -> Rational -> Value
 divides 0 0 = VBool True
 divides 0 _ = VBool False
 divides x y = VBool $ denominator (y / x) == 1
+
+gcd' :: Rational -> Rational -> Value
+gcd' a b = VNum ((numerator a `gcd` numerator b) % 1)
 
 relPm :: Rational -> Rational -> Value
 relPm (numerator -> x) (numerator -> y) = VBool $ gcd x y == 1

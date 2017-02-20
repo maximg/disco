@@ -116,6 +116,7 @@ data BOp = Add     -- ^ Addition (@+@)
          | RelPm   -- ^ Relative primality test (@#@)
          | Binom   -- ^ Binomial coefficient (@binom@)
          | Cons    -- ^ List cons (@::@)
+         | Gcd     -- ^ Greatest common divisor (@gcd@)
   deriving (Show, Eq)
 
 -- | Terms.

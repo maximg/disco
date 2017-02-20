@@ -90,6 +90,7 @@ data Op = OAdd     -- ^ Addition (@+@)
         | ORelPm   -- ^ Relative primality test (@#@)
         | OBinom   -- ^ Binomial coefficient (@choose@)
         | OFact    -- ^ Factorial (@!@)
+        | OGcd     -- ^ Greatest common divisor (@gcd@)
         | OEq Type -- ^ Equality test (@==@) at the given type.  At
                    --   this point, typechecking has determined that
                    --   the given type has decidable equality.  We

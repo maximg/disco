@@ -47,7 +47,7 @@ module Disco.Interpret.Core
 
          -- ** Operations
        , whnfOp, numOp, numOp', uNumOp, divOp, modOp, boolOp
-       , divides, relPm, binom, fact, notOp
+       , divides, relPm, binom, fact, gcd', notOp
 
          -- * Equality testing
        , eqOp, primValEq, enumerate
@@ -380,6 +380,7 @@ whnfOp ODivides = numOp' divides
 whnfOp ORelPm   = numOp' relPm
 whnfOp OBinom   = numOp binom
 whnfOp OFact    = uNumOp fact
+whnfOp OGcd     = numOp gcd'
 whnfOp (OEq ty) = eqOp ty
 whnfOp (OLt ty) = ltOp ty
 whnfOp ONot     = notOp
@@ -441,6 +442,11 @@ relPm (numerator -> x) (numerator -> y) = return . mkEnum $ gcd x y == 1
 --   numbers.
 binom :: Rational -> Rational -> Rational
 binom (numerator -> n) (numerator -> k) = choose n k % 1
+
+-- | Greatest common divisor.  The arguments will always be natural
+--   numbers.
+gcd' :: Rational -> Rational -> Rational
+gcd' (numerator -> a) (numerator -> b) = gcd (fromIntegral a) (fromIntegral b) % 1
 
 -- | Factorial.  The argument will always be a natural number.
 fact :: Rational -> Rational

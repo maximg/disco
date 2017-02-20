@@ -117,6 +117,7 @@ data TCError
   | PatternType Pattern Type  -- ^ The given pattern should have the type, but it doesn't.
   | ModQ                   -- ^ Can't do mod on rationals.
   | ExpQ                   -- ^ Can't exponentiate by a rational.
+  | GcdQ                   -- ^ Can't do GCD on rationals.
   | RelPmQ                 -- ^ Can't ask about relative primality of rationals.
   | DuplicateDecls (Name Term)  -- ^ Duplicate declarations.
   | DuplicateDefns (Name Term)  -- ^ Duplicate definitions.
@@ -490,6 +491,14 @@ infer (TBin Divides t1 t2) = do
   at2 <- infer t2
   _ <- numLub at1 at2
   return (ATBin TyBool Divides at1 at2)
+
+infer (TBin Gcd t1 t2) = do
+  at1 <- infer t1
+  at2 <- infer t2
+  ty <- numLub at1 at2
+  if (isSub ty TyZ)
+    then return (ATBin ty Gcd at1 at2)
+    else throwError GcdQ
 
 infer (TBin RelPm t1 t2) = do
   at1 <- infer t1

@@ -398,7 +398,7 @@ reservedWords :: [String]
 reservedWords =
   [ "true", "false", "True", "False", "inl", "inr", "let", "in", "is"
   , "if", "when"
-  , "otherwise", "and", "or", "not", "mod", "choose"
+  , "otherwise", "and", "or", "not", "mod", "choose", "gcd"
   , "Void", "Unit", "Bool", "Nat", "Natural", "Int", "Integer", "Rational"
   , "N", "Z", "Q", "ℕ", "ℤ", "ℚ"
   ]
@@ -629,6 +629,7 @@ parseExpr = makeExprParser parseAtom table <?> "expression"
               , infixL "/" (TBin Div)
               , infixL "%" (TBin Mod)
               , infixL "mod" (TBin Mod)
+              , infixL "gcd" (TBin Gcd)
               ]
             , [ infixL "+" (TBin Add)
               , infixL "-" (TBin Sub)

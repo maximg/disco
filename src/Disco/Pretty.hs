@@ -65,6 +65,7 @@ prec op = fromJust . findIndex (op `elem`) $
   , []
   , [ Add, Sub ]
   , [ Mul, Div, Mod ]
+  , [ Mul, Div, Mod, Gcd ]
   , [ Exp ]
   ]
 
@@ -197,6 +198,7 @@ prettyBOp And     = text "and"
 prettyBOp Or      = text "or"
 prettyBOp Mod     = text "mod"
 prettyBOp Divides = text "|"
+prettyBOp Gcd     = text "gcd"
 prettyBOp RelPm   = text "#"
 prettyBOp Binom   = text "choose"
 prettyBOp Cons    = text "::"
